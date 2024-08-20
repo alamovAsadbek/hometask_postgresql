@@ -25,7 +25,7 @@ class Auth:
             return {'is_login': True, 'role': 'admin'}
         elif email == self.__developer_email and password == self.__developer_password:
             return {'is_login': True, 'role': 'developer'}
-        get_user = self.__database_manager.get_data_by_email(table_name='users', email=email)
+        get_user = self.__database_manager.get_data(table_name='users', key_data=email, key='email')
         self.__active_user = get_user
         if self.__active_user is not None:
             return {'is_login': True, 'role': 'user'}

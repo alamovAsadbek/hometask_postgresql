@@ -1,5 +1,6 @@
 from main_files.auth import Auth
 from main_files.decorator_func import log_decorator
+from role.admin.admin import Admin
 from role.developer.developer import Developer
 
 
@@ -59,19 +60,24 @@ def admin_menu():
     '''
     print(text)
     try:
+        admin = Admin()
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             print('\nHome -> Show all users\n')
-            pass
+            admin.show_all_users()
+            admin_menu()
         elif user_input == 2:
             print('\nHome -> Show all female users\n')
-            pass
+            admin.show_all_female_users()
+            admin_menu()
         elif user_input == 3:
             print('\nHome -> Show all male users\n')
-            pass
+            admin.show_all_male_users()
+            admin_menu()
         elif user_input == 4:
             print('\nHome -> Delete user\n')
-            pass
+            admin.delete_user()
+            admin_menu()
         elif user_input == 5:
             auth_menu()
         else:

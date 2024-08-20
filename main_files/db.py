@@ -158,13 +158,14 @@ class DatabaseManager:
 
     # get data by email
     @log_decorator
-    def get_data_by_email(self, table_name: str, email: str):
+    def get_data(self, table_name: str, key: str, key_data: str):
         with self.connect() as cursor:
             query = sql.SQL('''
             SELECT * FROM {table_name}
-            WHERE email = %s;
+            WHERE {key} = %s;
             ''').format(
-                table_name=sql.Identifier(table_name)
+                table_name=sql.Identifier(table_name),
+                key=sql.Identifier(key),
             )
-            cursor.execute(query, (email,))
+            cursor.execute(query, (key_data,))
             return cursor.fetchall()
