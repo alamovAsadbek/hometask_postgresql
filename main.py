@@ -48,11 +48,11 @@ def auth_menu():
 @log_decorator
 def admin_menu():
     text = '''
-1. show all users
-2. show all female users
-3. show all male users
-4. delete user
-5. logout
+1. Show all users
+2. Show all female users
+3. Show all male users
+4. Delete user
+5. Logout
     '''
     print(text)
     try:
@@ -123,7 +123,7 @@ def developer_menu():
             developer.show_table()
             developer_menu()
         elif user_input == 7:
-            pass
+            auth_menu()
         else:
             print('Invalid input')
             developer_menu()
