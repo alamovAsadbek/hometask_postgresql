@@ -2,6 +2,7 @@ from main_files.auth import Auth
 from main_files.decorator_func import log_decorator
 from role.admin.admin import Admin
 from role.developer.developer import Developer
+from role.user.user import User
 
 
 # auth_menu
@@ -33,7 +34,7 @@ def auth_menu():
             elif result_login['role'] == 'admin':
                 admin_menu()
             elif result_login['role'] == 'user':
-                user_menu()
+                user_menu(result_login['email'])
         elif user_input == 3:
             print("Goodbye!")
             return
@@ -143,14 +144,14 @@ def developer_menu():
 
 # user menu
 @log_decorator
-def user_menu():
+def user_menu(data):
     text = '''
 1. Show all my data
 2. Logout
     '''
     print(text)
     try:
-
+        user = User(user_data=data)
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             pass

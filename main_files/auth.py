@@ -26,9 +26,12 @@ class Auth:
         elif email == self.__developer_email and password == self.__developer_password:
             return {'is_login': True, 'role': 'developer'}
         get_user = self.__database_manager.get_data(table_name='users', key_data=email, key='email')
-        self.__active_user = get_user
-        if self.__active_user is not None:
-            return {'is_login': True, 'role': 'user'}
+        if get_user is None:
+            print('Email or Password is incorrect!')
+            return {'is_login': False}
+        elif get_user['email'] == email and password == password:
+            print('Login successful!')
+            return {'is_login': True, 'role': 'user', 'email': email}
         return {'is_login': False}
 
     # register
@@ -61,9 +64,4 @@ class Auth:
         values = [first_name, last_name, email, password, gender, birthday, self.__created_at]
         self.__database_manager.add_data(table_name='users', columns=columns, values=values)
         print("Registered!")
-        return True
-
-    @log_decorator
-    def logout(self):
-        self.__active_user = None
         return True

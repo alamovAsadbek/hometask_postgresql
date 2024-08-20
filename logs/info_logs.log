@@ -1,2 +1,0 @@
-08/21/2024 04:09:38 - main_files.decorator_func - INFO - Function login: args: (<main_files.auth.Auth object at 0x00000222FF74A010>,) kwargs: {}, result: {'is_login': True, 'role': 'admin'} executed successfully.
-08/21/2024 04:09:40 - main_files.decorator_func - INFO - Function show_all_users: args: (<role.admin.admin.Admin object at 0x00000222FF74AD10>,) kwargs: {}, result: None executed successfully.
