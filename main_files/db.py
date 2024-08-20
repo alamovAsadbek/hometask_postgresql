@@ -64,3 +64,18 @@ class DatabaseManager:
                     table_name = full_name.split('.', 1)[1]
                     tables.append(table_name)
             return tables
+
+    # add column to table
+    @log_decorator
+    def add_column(self, table_name: str, column_name: str, column_type: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+                    ALTER TABLE {table_name} ALTER COLUMN {column_name} TYPE {column_data_type};
+                    ''').format(
+                table_name=sql.Identifier(table_name),
+                column_name=sql.Identifier(column_name),
+                column_data_type=sql.SQL(column_type)
+            )
+            cursor.execute(query)
+            cursor.connection.commit()
+            return True

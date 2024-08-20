@@ -1,3 +1,5 @@
+import threading
+
 from main_files.db import DatabaseManager
 from main_files.decorator_func import log_decorator
 
@@ -5,6 +7,7 @@ from main_files.decorator_func import log_decorator
 class Developer:
     def __init__(self):
         self.__data_type = ['varchar', 'serial primary key', 'date', 'int', 'bigint', 'smallint', 'text', 'timestamp']
+        self.__database_manager = DatabaseManager()
 
     # show all data types
     @log_decorator
@@ -34,8 +37,7 @@ class Developer:
     # create new table
     @log_decorator
     def create_table(self) -> bool:
-        database_manager = DatabaseManager()
-        all_tables = database_manager.show_all_tables()
+        all_tables = self.__database_manager.show_all_tables()
         columns_data: list = []
         table_name: str = input("Table name: ").strip().lower()
         if table_name in all_tables:
@@ -70,7 +72,7 @@ class Developer:
 
             self.show_columns(columns_data)
 
-        if database_manager.create_table(table_name=table_name, table_columns=columns_data):
+        if self.__database_manager.create_table(table_name=table_name, table_columns=columns_data):
             print("Table created successfully")
             return True
         print("Table already exists")
@@ -79,8 +81,25 @@ class Developer:
     # show all tables
     @log_decorator
     def show_table(self) -> bool:
-        database_manager = DatabaseManager()
-        all_tables: list = database_manager.show_all_tables()
+        all_tables: list = self.__database_manager.show_all_tables()
         for index, table in enumerate(all_tables):
             print(f'\nTable {index + 1}: Table name: {table}')
         return True
+
+    # add column to table
+    @log_decorator
+    def add_column(self):
+        all_tables: list = self.__database_manager.show_all_tables()
+        self.show_table()
+        choose_table: str = input("\nEnter table name: ").strip().lower()
+        if choose_table in all_tables:
+            column_name: str = input("Column name: ").strip().lower()
+            self.show_data_type()
+            column_type: str = input("Column type: ").strip().lower()
+            if column_type in self.__data_type[0] or column_type in self.__data_type:
+                threading.Thread(target=self.__database_manager.add_column,
+                                 args=(choose_table, column_name, column_type)).start()
+                
+        else:
+            print('Table does not exist')
+            return False
