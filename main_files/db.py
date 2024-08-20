@@ -96,6 +96,23 @@ class DatabaseManager:
             cursor.connection.commit()
             return True
 
+    # change column type
+    @log_decorator
+    def change_column_type(self, table_name: str, column_name: str, column_type: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            ALTER TABLE {table_name}
+            ALTER COLUMN {column_name}
+            TYPE {column_type};
+            ''').format(
+                table_name=sql.Identifier(table_name),
+                column_name=sql.Identifier(column_name),
+                column_type=sql.SQL(column_type)
+            )
+            cursor.execute(query)
+            cursor.connection.commit()
+            return True
+
     # show all column in table
     @log_decorator
     def show_all_column(self, table_name: str):

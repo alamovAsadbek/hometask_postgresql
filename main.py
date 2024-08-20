@@ -112,6 +112,8 @@ def developer_menu():
             developer_menu()
         elif user_input == 4:
             print('\nHome -> Change column data type\n')
+            developer.change_column_type()
+            developer_menu()
         elif user_input == 5:
             print('\nHome -> Delete table\n')
         elif user_input == 6:

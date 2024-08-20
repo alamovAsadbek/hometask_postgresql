@@ -16,7 +16,6 @@ class Developer:
     # show all columns
     @log_decorator
     def show_columns(self, columns_data: list) -> None:
-        print('\n')
         for index, col in enumerate(columns_data):
             print(f'Column {index + 1}: Column name: {col[0]}, Column type: {col[1]}')
         return None
@@ -83,7 +82,10 @@ class Developer:
     def show_table(self) -> bool:
         all_tables: list = self.__database_manager.show_all_tables()
         for index, table in enumerate(all_tables):
+            all_columns: list = self.__database_manager.show_all_column(table_name=table)
             print(f'\nTable {index + 1}: Table name: {table}')
+            print('\nColumns\n')
+            self.show_columns(columns_data=all_columns)
         return True
 
     # add column to table
@@ -96,6 +98,7 @@ class Developer:
             column_name: str = input("Column name: ").strip().lower()
             self.show_data_type()
             column_type: str = input("Column type: ").strip().lower()
+            column_type = self.check_unique(column_type)
             if column_type in self.__data_type[0] or column_type in self.__data_type:
                 if self.__database_manager.add_column(table_name=choose_table, column_name=column_name,
                                                       column_type=column_type):
@@ -150,12 +153,21 @@ class Developer:
             for col in all_column:
                 if col[0] == choose_column:
                     is_there = True
+            if not is_there:
+                print("Column not found")
+                return False
             self.show_data_type()
             column_data: str = input("\nEnter data type: ").strip().lower()
             if column_data in self.__data_type:
                 pass
-            elif column_data in self.__data_type[0]:
+            elif self.__data_type[0] in column_data:
                 pass
             else:
                 print("Please enter a valid data type.")
                 return False
+            column_data = self.check_unique(data_type=column_data)
+            self.__database_manager.change_column_type(table_name=choose_table, column_name=choose_column,
+                                                       column_type=column_data)
+            print("Column type changed successfully")
+            return True
+    # delete table
