@@ -31,47 +31,5 @@ class Admin:
                 data_type += ' unique'
             return data_type
 
-    @log_decorator
-    def create_table(self):
-        database_manager = DatabaseManager()
-        columns_data: list = []
-        table_name: str = input("Table name: ").strip()
-        print("Enter column👇: ")
-        while True:
-            print("\nType exit to exit❌")
-            column_name: str = input("\nColumn name: ").strip().lower()
-            if column_name == "":
-                print("Please enter a valid column name.")
-                continue
-            elif column_name == "exit":
-                print("Exit")
-                break
-            print("Enter data type👇")
-            self.show_data_type()
-            column_type: str = input("Enter data type name: ").strip().lower()
-            if column_type == "exit":
-                print("Exit")
-                break
-            elif 'varchar' in column_type:
-                column_type = self.check_unique(column_type)
-                columns_data.append((column_name, column_type))
-            elif column_type in self.__data_type[0] or column_type in self.__data_type:
-                column_type = self.check_unique(column_type)
-                columns_data.append((column_name, column_type))
-
-            else:
-                print("Please enter a valid data type.")
-                continue
-
-            self.show_columns(columns_data)
-
-        if database_manager.create_table(table_name=table_name, table_columns=columns_data):
-            print("Table created successfully")
-            return True
-        print("Table already exists")
-        return False
 
 
-if __name__ == '__main__':
-    admin = Admin()
-    admin.create_table()

@@ -1,5 +1,6 @@
 from main_files.auth import Auth
 from main_files.decorator_func import log_decorator
+from role.developer.developer import Developer
 
 
 # auth_menu
@@ -95,10 +96,11 @@ def developer_menu():
     '''
     print(text)
     try:
-        developer=Developer()
+        developer = Developer()
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
-            pass
+            developer.create_table()
+            developer_menu()
         elif user_input == 2:
             pass
         elif user_input == 3:

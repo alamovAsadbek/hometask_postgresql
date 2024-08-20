@@ -22,6 +22,7 @@ class Auth:
             return {'is_login': True, 'role': 'admin'}
         elif email == self.__developer_email and password == self.__developer_password:
             return {'is_login': True, 'role': 'developer'}
+        return {'is_login': False}
 
     # register
 
