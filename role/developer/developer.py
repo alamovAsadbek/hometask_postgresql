@@ -1,5 +1,3 @@
-import threading
-
 from main_files.db import DatabaseManager
 from main_files.decorator_func import log_decorator
 
@@ -97,9 +95,27 @@ class Developer:
             self.show_data_type()
             column_type: str = input("Column type: ").strip().lower()
             if column_type in self.__data_type[0] or column_type in self.__data_type:
-                threading.Thread(target=self.__database_manager.add_column,
-                                 args=(choose_table, column_name, column_type)).start()
-                
+                if self.__database_manager.add_column(table_name=choose_table, column_name=column_name,
+                                                      column_type=column_type):
+                    print("Column added successfully")
+                    return True
+                print("Column already exists")
+                return False
+            else:
+                print("Data type invalid")
+                return False
         else:
             print('Table does not exist')
+            return False
+
+    # remove column
+    @log_decorator
+    def remove_column(self):
+        all_tables: list = self.__database_manager.show_all_tables()
+        self.show_table()
+        choose_table: str = input("\nEnter table name: ").strip().lower()
+        if choose_table in all_tables:
+            self.__database_manager.show_all_column(table_name=choose_table)
+        else:
+            print("Table not found")
             return False

@@ -70,7 +70,8 @@ class DatabaseManager:
     def add_column(self, table_name: str, column_name: str, column_type: str):
         with self.connect() as cursor:
             query = sql.SQL('''
-                    ALTER TABLE {table_name} ALTER COLUMN {column_name} TYPE {column_data_type};
+                    ALTER TABLE {table_name} 
+                    ADD COLUMN {column_name} {column_data_type};
                     ''').format(
                 table_name=sql.Identifier(table_name),
                 column_name=sql.Identifier(column_name),
@@ -79,3 +80,16 @@ class DatabaseManager:
             cursor.execute(query)
             cursor.connection.commit()
             return True
+
+    # show all column in table
+    @log_decorator
+    def show_all_column(self, table_name: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            SELECT column_name, data_type
+            FROM information_schema.columns
+            WHERE table_name = %s
+            ORDER BY ordinal_position;
+            ''')
+            cursor.execute(query, (table_name,))
+            print(cursor.fetchall())

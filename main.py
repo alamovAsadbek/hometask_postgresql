@@ -104,8 +104,12 @@ def developer_menu():
             developer_menu()
         elif user_input == 2:
             print('\nHome -> Add column to table\n')
+            developer.add_column()
+            developer_menu()
         elif user_input == 3:
             print('\nHome -> Remove column from table\n')
+            developer.remove_column()
+            developer_menu()
         elif user_input == 4:
             print('\nHome -> Change column data type\n')
         elif user_input == 5:
