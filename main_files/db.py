@@ -11,7 +11,6 @@ class DatabaseManager:
     # connect database
     @contextlib.contextmanager
     def connect(self):
-        global connection
         try:
             connection = None
             params = config()
@@ -19,15 +18,14 @@ class DatabaseManager:
             cursor = connection.cursor()
             yield cursor
             cursor.close()
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(f'Error: {error}')
-        finally:
             if connection is not None:
                 connection.close()
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(f'Error: {error}')
 
-    # create table
+    # create users table
     @log_decorator
-    def create_table(self, table_name: str, data_type):
+    def create_users_table(self):
         try:
             with self.connect() as cursor:
                 cursor.execute('''CREATE TABLE IF NOT EXISTS USERS (
@@ -42,14 +40,14 @@ class DatabaseManager:
                 );
                 ''')
                 cursor.connection.commit()
-                print(f'Table {table_name} has been created')
+                print(f'Table has been created')
         except psycopg2.errors.DuplicateDatabase:
-            print(f'Table {table_name} already exists')
+            print(f'Table already exists')
             return True
         except psycopg2.DatabaseError:
             print("Error while connecting to database")
             return False
 
-
-if __name__ == '__main__':
-    DatabaseManager().create_table('users')
+    # create data in users table
+    def append_data_to_users_table(self):
+        pass
