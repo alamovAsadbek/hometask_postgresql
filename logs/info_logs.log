@@ -1,0 +1,4 @@
+08/21/2024 04:03:09 - main_files.decorator_func - INFO - Function get_data_by_email: args: (<main_files.db.DatabaseManager object at 0x0000015B71F99E50>,) kwargs: {'table_name': 'users', 'email': 'alamovasad69@gmail.com'}, result: [('Asadbek', "A'lamov", 'alamovasad69@gmail.com', 'male', datetime.date(2004, 5, 19), '9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0', datetime.datetime(2024, 8, 21, 3, 39, 16), 1)] executed successfully.
+08/21/2024 04:03:09 - main_files.decorator_func - INFO - Function login: args: (<main_files.auth.Auth object at 0x0000015B71F99DD0>,) kwargs: {}, result: {'is_login': True, 'role': 'user'} executed successfully.
+08/21/2024 04:03:11 - main_files.decorator_func - INFO - Function user_menu: args: () kwargs: {}, result: None executed successfully.
+08/21/2024 04:03:11 - main_files.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.

@@ -31,6 +31,8 @@ def auth_menu():
                 developer_menu()
             elif result_login['role'] == 'admin':
                 admin_menu()
+            elif result_login['role'] == 'user':
+                user_menu()
         elif user_input == 3:
             print("Goodbye!")
             return
@@ -136,7 +138,23 @@ def developer_menu():
 # user menu
 @log_decorator
 def user_menu():
-    pass
+    text = '''
+1. Show all my data
+2. Logout
+    '''
+    print(text)
+    try:
+        user_input: int = int(input('Choose menu: '))
+        if user_input == 1:
+            pass
+        elif user_input == 2:
+            auth_menu()
+        else:
+            print('Invalid input')
+            user_menu()
+    except Exception as e:
+        print(f'Error: {e}')
+        user_menu()
 
 
 if __name__ == '__main__':

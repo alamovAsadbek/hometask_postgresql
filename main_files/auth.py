@@ -13,6 +13,7 @@ class Auth:
         self.__developer_password = hashlib.sha256('0000'.encode('utf-8')).hexdigest()
         self.__created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S').__str__()
         self.__database_manager = DatabaseManager()
+        self.__active_user = None
 
     # login
 
@@ -25,7 +26,9 @@ class Auth:
         elif email == self.__developer_email and password == self.__developer_password:
             return {'is_login': True, 'role': 'developer'}
         get_user = self.__database_manager.get_data_by_email(table_name='users', email=email)
-        print(get_user)
+        self.__active_user = get_user
+        if self.__active_user is not None:
+            return {'is_login': True, 'role': 'user'}
         return {'is_login': False}
 
     # register
