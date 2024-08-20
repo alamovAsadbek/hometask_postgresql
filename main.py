@@ -11,7 +11,17 @@ def auth_menu():
     '''
     print(text)
     try:
-        pass
+        user_input: int = int(input('Choose menu: '))
+        if user_input == 1:
+            pass
+        elif user_input == 2:
+            pass
+        elif user_input == 3:
+            print("Goodbye!")
+            return
+        else:
+            print('Invalid input')
+            auth_menu()
     except ValueError:
         print('Invalid menu')
         auth_menu()
