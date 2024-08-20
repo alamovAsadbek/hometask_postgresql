@@ -1,0 +1,1 @@
+08/21/2024 02:54:54 - main_files.decorator_func - INFO - Function login: args: (<main_files.auth.Auth object at 0x0000025048DF9C50>,) kwargs: {}, result: {'is_login': True, 'role': 'developer'} executed successfully.

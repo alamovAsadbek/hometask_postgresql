@@ -170,4 +170,8 @@ class Developer:
                                                        column_type=column_data)
             print("Column type changed successfully")
             return True
+
     # delete table
+    @log_decorator
+    def delete_table(self) -> bool:
+        pass
