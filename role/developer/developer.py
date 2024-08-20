@@ -170,6 +170,9 @@ class Developer:
                                                        column_type=column_data)
             print("Column type changed successfully")
             return True
+        else:
+            print("Table not found")
+            return False
 
     # delete table
     @log_decorator
@@ -181,3 +184,6 @@ class Developer:
             if self.__database_manager.delete_table(table_name=choose_table):
                 print("Table deleted successfully")
                 return True
+        else:
+            print("Table not found")
+            return False

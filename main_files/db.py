@@ -144,11 +144,14 @@ class DatabaseManager:
     def add_data(self, table_name: str, columns, values):
         with self.connect() as cursor:
             columns_placeholder = ', '.join([sql.Identifier(col).as_string(cursor) for col in columns])
-            values_placeholder = ', '.join([sql.Placeholder()] * len(values))
+            values_placeholder = ', '.join(['%s'] * len(values))
             query = sql.SQL('''
             INSERT INTO {table_name} ({columns}) VALUES ({values});
             ''').format(
                 table_name=sql.Identifier(table_name),
-                columns=columns_placeholder,
-                values=values_placeholder
+                columns=sql.SQL(columns_placeholder),
+                values=sql.SQL(values_placeholder)
             )
+            cursor.execute(query, values)
+            cursor.connection.commit()
+            return True

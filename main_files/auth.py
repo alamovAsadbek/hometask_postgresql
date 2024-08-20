@@ -31,7 +31,6 @@ class Auth:
     @log_decorator
     def register(self) -> bool:
         columns = ['first_name', 'last_name', 'email', 'password', 'gender', 'birthday', 'created_at']
-        self.__database_manager.add_data(table_name='users', columns=columns, values=None)
         first_name = input('First name: ').strip()
         last_name = input('Last name: ').strip()
         email = input('Email: ').strip()
@@ -54,4 +53,7 @@ class Auth:
             print("Passwords do not match")
             password = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
             confirm_password: str = hashlib.sha256(input("Confirm Password: ").strip().encode('utf-8')).hexdigest()
+        values = [first_name, last_name, email, password, gender, birthday, self.__created_at]
+        self.__database_manager.add_data(table_name='users', columns=columns, values=values)
+        print("Registered!")
         return True
