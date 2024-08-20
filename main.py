@@ -1,4 +1,8 @@
+from main_files.decorator_func import log_decorator
+
+
 # auth_menu
+@log_decorator
 def auth_menu():
     text = '''
 1. Register
@@ -17,15 +21,18 @@ def auth_menu():
 
 
 # admin menu
+@log_decorator
 def admin_menu():
     pass
 
 
 # developer menu
+@log_decorator
 def developer_menu():
     pass
 
 
 # user menu
+@log_decorator
 def user_menu():
     pass
