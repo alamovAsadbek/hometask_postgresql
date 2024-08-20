@@ -1,6 +1,7 @@
 import hashlib
 from datetime import datetime
 
+from main_files.db import DatabaseManager
 from main_files.decorator_func import log_decorator
 
 
@@ -11,6 +12,7 @@ class Auth:
         self.__developer_email = 'alamovasad55@gmail.com'
         self.__developer_password = hashlib.sha256('0000'.encode('utf-8')).hexdigest()
         self.__created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S').__str__()
+        self.__database_manager = DatabaseManager()
 
     # login
 
@@ -28,6 +30,8 @@ class Auth:
 
     @log_decorator
     def register(self) -> bool:
+        columns = ['first_name', 'last_name', 'email', 'password', 'gender', 'birthday', 'created_at']
+        self.__database_manager.add_data(table_name='users', columns=columns, values=None)
         first_name = input('First name: ').strip()
         last_name = input('Last name: ').strip()
         email = input('Email: ').strip()

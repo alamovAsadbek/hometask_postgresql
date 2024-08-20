@@ -138,3 +138,17 @@ class DatabaseManager:
             cursor.execute(query)
             cursor.connection.commit()
             return True
+
+    # write table
+    @log_decorator
+    def add_data(self, table_name: str, columns, values):
+        with self.connect() as cursor:
+            columns_placeholder = ', '.join([sql.Identifier(col).as_string(cursor) for col in columns])
+            values_placeholder = ', '.join([sql.Placeholder()] * len(values))
+            query = sql.SQL('''
+            INSERT INTO {table_name} ({columns}) VALUES ({values});
+            ''').format(
+                table_name=sql.Identifier(table_name),
+                columns=columns_placeholder,
+                values=values_placeholder
+            )

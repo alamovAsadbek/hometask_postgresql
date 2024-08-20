@@ -17,7 +17,8 @@ def auth_menu():
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             print('\nHome -> Register\n')
-            pass
+            auth.register()
+            auth_menu()
         elif user_input == 2:
             print('\nHome -> Login\n')
             print('Developer email: alamovasad55@gmail.com | \tDeveloper password: 0000')
