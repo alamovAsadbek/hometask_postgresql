@@ -155,3 +155,16 @@ class DatabaseManager:
             cursor.execute(query, values)
             cursor.connection.commit()
             return True
+
+    # get data by email
+    @log_decorator
+    def get_data_by_email(self, email: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            SELECT * FROM {table_name}
+            WHERE email = '{email}';
+            ''').format(
+                email=sql.Identifier(email)
+            )
+            cursor.execute(query)
+            return cursor.fetchall()
