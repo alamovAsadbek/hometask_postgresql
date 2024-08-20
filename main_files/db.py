@@ -45,11 +45,3 @@ class DatabaseManager:
             return True
         except psycopg2.DatabaseError:
             return False
-
-    # # create data in users table
-    # def append_data_to_users_table(self):
-    #     if not self.create_table():
-    #         print('Database creation failed')
-    #         return False
-    #     with self.connect() as cursor:
-    #         cursor

@@ -1,0 +1,3 @@
+08/21/2024 00:42:49 - main_files.decorator_func - INFO - Function login: args: (<main_files.auth.Auth object at 0x000001D2A3469790>,) kwargs: {}, result: {'is_login': True, 'role': 'developer'} executed successfully.
+08/21/2024 00:42:52 - main_files.decorator_func - INFO - Function developer_menu: args: () kwargs: {}, result: None executed successfully.
+08/21/2024 00:42:52 - main_files.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.

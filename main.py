@@ -1,3 +1,4 @@
+from main_files.auth import Auth
 from main_files.decorator_func import log_decorator
 
 
@@ -11,13 +12,23 @@ def auth_menu():
     '''
     print(text)
     try:
+        auth = Auth()
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             print('\nHome -> Register\n')
             pass
         elif user_input == 2:
             print('\nHome -> Login\n')
-            pass
+            print('Developer email: alamovasad55@gmail.com | \tDeveloper password: 0000')
+            print('Admin email: alamovasad@gmail.com | \tAdmin password: 0000\n')
+            result_login = auth.login()
+            if not result_login['is_login']:
+                print('Login failed.')
+                auth_menu()
+            elif result_login['role'] == 'developer':
+                developer_menu()
+            elif result_login['role'] == 'admin':
+                admin_menu()
         elif user_input == 3:
             print("Goodbye!")
             return
@@ -84,6 +95,7 @@ def developer_menu():
     '''
     print(text)
     try:
+        developer=Developer()
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             pass
@@ -111,3 +123,7 @@ def developer_menu():
 @log_decorator
 def user_menu():
     pass
+
+
+if __name__ == '__main__':
+    auth_menu()

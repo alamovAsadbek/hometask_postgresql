@@ -7,16 +7,21 @@ from main_files.decorator_func import log_decorator
 class Auth:
     def __init__(self):
         self.__admin_email = 'alamovasad@gmail.com'
+        self.__admin_password = hashlib.sha256('0000'.encode('utf-8')).hexdigest()
         self.__developer_email = 'alamovasad55@gmail.com'
+        self.__developer_password = hashlib.sha256('0000'.encode('utf-8')).hexdigest()
         self.__created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S').__str__()
 
     # login
 
     @log_decorator
-    def login(self) -> bool:
+    def login(self) -> dict:
         email: str = input('Email: ').strip()
         password: str = hashlib.sha256(input("Password: ").strip().encode('utf-8')).hexdigest()
-        return True
+        if email == self.__admin_email and password == self.__admin_password:
+            return {'is_login': True, 'role': 'admin'}
+        elif email == self.__developer_email and password == self.__developer_password:
+            return {'is_login': True, 'role': 'developer'}
 
     # register
 
