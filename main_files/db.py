@@ -1,8 +1,9 @@
 import contextlib
 
 import psycopg2
+from psycopg2 import sql
 
-from config import config
+from main_files.config import config
 from main_files.decorator_func import log_decorator
 
 
@@ -25,29 +26,30 @@ class DatabaseManager:
 
     # create users table
     @log_decorator
-    def create_users_table(self):
+    def create_table(self, table_name: str, table_columns):
         try:
             with self.connect() as cursor:
-                cursor.execute('''CREATE TABLE IF NOT EXISTS USERS (
-                id serial PRIMARY KEY,
-                first_name varchar(50) not null,
-                last_name varchar(50) not null,
-                email varchar(50) unique not null,
-                gender varchar(50) not null,
-                birthday date not null,
-                password varchar(500) not null,
-                created_at timestamp not null, 
-                );
-                ''')
+                query = sql.SQL('CREATE TABLE IF NOT EXISTS {} ({})').format(
+                    sql.Identifier(table_name),
+                    sql.SQL(', ').join(
+                        sql.SQL('{} {}').format(
+                            sql.Identifier(col_name),
+                            sql.SQL(col_type)
+                        ) for col_name, col_type in table_columns
+                    )
+                )
+                cursor.execute(query)
                 cursor.connection.commit()
-                print(f'Table has been created')
+                return True
         except psycopg2.errors.DuplicateDatabase:
-            print(f'Table already exists')
             return True
         except psycopg2.DatabaseError:
-            print("Error while connecting to database")
             return False
 
-    # create data in users table
-    def append_data_to_users_table(self):
-        pass
+    # # create data in users table
+    # def append_data_to_users_table(self):
+    #     if not self.create_table():
+    #         print('Database creation failed')
+    #         return False
+    #     with self.connect() as cursor:
+    #         cursor
