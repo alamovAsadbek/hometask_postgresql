@@ -25,13 +25,24 @@ class DatabaseManager:
             if connection is not None:
                 connection.close()
 
-    # show all tables
+    # create table
     @log_decorator
-    def check_table(self, table_name: str):
+    def create_table(self, table_name: str, data_type):
         try:
             with self.connect() as cursor:
-                cursor.execute('''''')
-                print(f'Table {table_name} has been dropped')
+                cursor.execute('''CREATE TABLE IF NOT EXISTS USERS (
+                id serial PRIMARY KEY,
+                first_name varchar(50) not null,
+                last_name varchar(50) not null,
+                email varchar(50) unique not null,
+                gender varchar(50) not null,
+                birthday date not null,
+                password varchar(500) not null,
+                created_at timestamp not null, 
+                );
+                ''')
+                cursor.connection.commit()
+                print(f'Table {table_name} has been created')
         except psycopg2.errors.DuplicateDatabase:
             print(f'Table {table_name} already exists')
             return True
@@ -39,8 +50,6 @@ class DatabaseManager:
             print("Error while connecting to database")
             return False
 
-    # create table
-    @log_decorator
-    def create_table(self):
-        with self.connect() as cursor:
-            cursor.execute('CREATE TABLE ')
+
+if __name__ == '__main__':
+    DatabaseManager().create_table('users')
