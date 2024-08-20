@@ -154,7 +154,8 @@ def user_menu(data):
         user = User(user_data=data)
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
-            pass
+            user.profile()
+            user_menu()
         elif user_input == 2:
             auth_menu()
         else:

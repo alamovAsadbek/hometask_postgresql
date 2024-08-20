@@ -1,0 +1,19 @@
+08/21/2024 04:44:53 - main_files.decorator_func - INFO - Function get_data: args: (<main_files.db.DatabaseManager object at 0x000001B04EA5A210>,) kwargs: {'table_name': 'users', 'key_data': 'alamovasad69@gmail.com', 'key': 'email'}, result: [('Asadbek', "A'lamov", 'alamovasad69@gmail.com', 'male', datetime.date(2004, 5, 19), '9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0', datetime.datetime(2024, 8, 21, 3, 39, 16), 1)] executed successfully.
+08/21/2024 04:44:53 - main_files.decorator_func - INFO - Function login: args: (<main_files.auth.Auth object at 0x000001B04EA5A1D0>,) kwargs: {}, result: {'is_login': True, 'role': 'user', 'email': 'alamovasad69@gmail.com'} executed successfully.
+08/21/2024 04:45:24 - main_files.decorator_func - ERROR - Function profile: 'str' object has no attribute 'get'
+Traceback (most recent call last):
+  File "D:\Code\NAJOT TALIM\HOMEWORK\Lesson43\pythonProject\main_files\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Code\NAJOT TALIM\HOMEWORK\Lesson43\pythonProject\role\user\user.py", line 10, in profile
+    print(f'First name: {self.data.get("first_name")}\nLast name: {self.data.get("last_name")}\n'
+                         ^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'get'
+08/21/2024 04:45:24 - main_files.decorator_func - ERROR - Function user_menu: user_menu() missing 1 required positional argument: 'data'
+Traceback (most recent call last):
+  File "D:\Code\NAJOT TALIM\HOMEWORK\Lesson43\pythonProject\main_files\decorator_func.py", line 21, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+TypeError: user_menu() missing 1 required positional argument: 'data'
+08/21/2024 04:45:24 - main_files.decorator_func - INFO - Function user_menu: args: ('alamovasad69@gmail.com',) kwargs: {}, result: None executed successfully.
+08/21/2024 04:45:24 - main_files.decorator_func - INFO - Function auth_menu: args: () kwargs: {}, result: None executed successfully.

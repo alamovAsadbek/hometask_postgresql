@@ -29,9 +29,10 @@ class Auth:
         if get_user is None:
             print('Email or Password is incorrect!')
             return {'is_login': False}
-        elif get_user['email'] == email and password == password:
+        elif get_user[0][2] == email and get_user[0][5] == password:
             print('Login successful!')
             return {'is_login': True, 'role': 'user', 'email': email}
+        print('Email or Password is incorrect!')
         return {'is_login': False}
 
     # register
