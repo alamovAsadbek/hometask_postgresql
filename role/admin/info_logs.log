@@ -1,0 +1,2 @@
+08/20/2024 23:44:27 - main_files.decorator_func - INFO - Function show_data_type: args: (<__main__.Admin object at 0x000001422C999F50>,) kwargs: {}, result: None executed successfully.
+08/20/2024 23:44:53 - main_files.decorator_func - INFO - Function show_data_type: args: (<__main__.Admin object at 0x000001422C999F50>,) kwargs: {}, result: None executed successfully.
