@@ -1,0 +1,7 @@
+08/21/2024 02:27:55 - main_files.decorator_func - INFO - Function login: args: (<main_files.auth.Auth object at 0x0000016F69929C10>,) kwargs: {}, result: {'is_login': True, 'role': 'developer'} executed successfully.
+08/21/2024 02:27:57 - main_files.decorator_func - INFO - Function show_all_tables: args: (<main_files.db.DatabaseManager object at 0x0000016F6992A750>,) kwargs: {}, result: ['users', 'product'] executed successfully.
+08/21/2024 02:27:57 - main_files.decorator_func - INFO - Function show_all_tables: args: (<main_files.db.DatabaseManager object at 0x0000016F6992A750>,) kwargs: {}, result: ['users', 'product'] executed successfully.
+08/21/2024 02:27:57 - main_files.decorator_func - INFO - Function show_table: args: (<role.developer.developer.Developer object at 0x0000016F69929CD0>,) kwargs: {}, result: True executed successfully.
+08/21/2024 02:28:04 - main_files.decorator_func - INFO - Function show_data_type: args: (<role.developer.developer.Developer object at 0x0000016F69929CD0>,) kwargs: {}, result: None executed successfully.
+08/21/2024 02:28:09 - main_files.decorator_func - INFO - Function add_column: args: (<main_files.db.DatabaseManager object at 0x0000016F6992A750>,) kwargs: {'table_name': 'users', 'column_name': 'created_at', 'column_type': 'timestamp'}, result: True executed successfully.
+08/21/2024 02:28:09 - main_files.decorator_func - INFO - Function add_column: args: (<role.developer.developer.Developer object at 0x0000016F69929CD0>,) kwargs: {}, result: True executed successfully.

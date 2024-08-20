@@ -16,8 +16,10 @@ class Developer:
     # show all columns
     @log_decorator
     def show_columns(self, columns_data: list) -> None:
+        print('\n')
         for index, col in enumerate(columns_data):
-            print(f'\nColumn {index + 1}: Column name: {col[0]}, Column type: {col[1]}')
+            print(f'Column {index + 1}: Column name: {col[0]}, Column type: {col[1]}')
+        return None
 
     # this function is check unique column
     @log_decorator
@@ -86,7 +88,7 @@ class Developer:
 
     # add column to table
     @log_decorator
-    def add_column(self):
+    def add_column(self) -> bool:
         all_tables: list = self.__database_manager.show_all_tables()
         self.show_table()
         choose_table: str = input("\nEnter table name: ").strip().lower()
@@ -110,12 +112,31 @@ class Developer:
 
     # remove column
     @log_decorator
-    def remove_column(self):
+    def remove_column(self) -> bool:
+        is_there = False
         all_tables: list = self.__database_manager.show_all_tables()
         self.show_table()
         choose_table: str = input("\nEnter table name: ").strip().lower()
         if choose_table in all_tables:
-            self.__database_manager.show_all_column(table_name=choose_table)
+            all_column = self.__database_manager.show_all_column(table_name=choose_table)
+            self.show_columns(all_column)
+            choose_column: str = input("\nEnter column name: ").strip().lower()
+            for col in all_column:
+                if col[0] == choose_column:
+                    is_there = True
+            if not is_there:
+                print("Column does not exist")
+                return False
+            if self.__database_manager.delete_column(table_name=choose_table, column_name=choose_column):
+                print("Column removed successfully")
+                return True
+            print("Column removed failed")
+            return False
         else:
             print("Table not found")
             return False
+
+    # change column data type
+    @log_decorator
+    def change_column_type(self):
+        pass

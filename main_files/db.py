@@ -81,6 +81,21 @@ class DatabaseManager:
             cursor.connection.commit()
             return True
 
+    # delete column
+    @log_decorator
+    def delete_column(self, table_name: str, column_name: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+                        ALTER TABLE {table_name} 
+                        DROP COLUMN {column_name};
+                        ''').format(
+                table_name=sql.Identifier(table_name),
+                column_name=sql.Identifier(column_name),
+            )
+            cursor.execute(query)
+            cursor.connection.commit()
+            return True
+
     # show all column in table
     @log_decorator
     def show_all_column(self, table_name: str):
@@ -92,4 +107,4 @@ class DatabaseManager:
             ORDER BY ordinal_position;
             ''')
             cursor.execute(query, (table_name,))
-            print(cursor.fetchall())
+            return cursor.fetchall()
