@@ -155,12 +155,12 @@ def user_menu(data):
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             user.profile()
-            user_menu()
+            user_menu(data)
         elif user_input == 2:
             auth_menu()
         else:
             print('Invalid input')
-            user_menu()
+            user_menu(data)
     except Exception as e:
         print(f'Error: {e}')
         user_menu()
