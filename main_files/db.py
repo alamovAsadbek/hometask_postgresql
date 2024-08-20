@@ -125,3 +125,8 @@ class DatabaseManager:
             ''')
             cursor.execute(query, (table_name,))
             return cursor.fetchall()
+
+    # delete table in database
+    @log_decorator
+    def delete_table(self, table_name: int):
+        pass
