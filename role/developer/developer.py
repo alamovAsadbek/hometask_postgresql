@@ -31,11 +31,16 @@ class Developer:
                 data_type += ' unique'
             return data_type
 
+    # create new table
     @log_decorator
-    def create_table(self):
+    def create_table(self) -> bool:
         database_manager = DatabaseManager()
+        all_tables = database_manager.show_all_tables()
         columns_data: list = []
-        table_name: str = input("Table name: ").strip()
+        table_name: str = input("Table name: ").strip().lower()
+        if table_name in all_tables:
+            print('Table already exists')
+            return False
         print("Enter column👇: ")
         while True:
             print("\nType exit to exit❌")
@@ -70,3 +75,12 @@ class Developer:
             return True
         print("Table already exists")
         return False
+
+    # show all tables
+    @log_decorator
+    def show_table(self) -> bool:
+        database_manager = DatabaseManager()
+        all_tables: list = database_manager.show_all_tables()
+        for index, table in enumerate(all_tables):
+            print(f'\nTable {index + 1}: Table name: {table}')
+        return True

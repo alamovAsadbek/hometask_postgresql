@@ -99,18 +99,21 @@ def developer_menu():
         developer = Developer()
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
+            print('\nHome -> Create table\n')
             developer.create_table()
             developer_menu()
         elif user_input == 2:
-            pass
+            print('\nHome -> Add column to table\n')
         elif user_input == 3:
-            pass
+            print('\nHome -> Remove column from table\n')
         elif user_input == 4:
-            pass
+            print('\nHome -> Change column data type\n')
         elif user_input == 5:
-            pass
+            print('\nHome -> Delete table\n')
         elif user_input == 6:
-            pass
+            print('\nHome -> Show all tables\n')
+            developer.show_table()
+            developer_menu()
         elif user_input == 7:
             pass
         else:

@@ -45,3 +45,22 @@ class DatabaseManager:
             return True
         except psycopg2.DatabaseError:
             return False
+
+    # show all tables
+    @log_decorator
+    def show_all_tables(self):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            SELECT table_schema || '.' || table_name
+            FROM information_schema.tables
+            WHERE table_type = 'BASE TABLE'
+            AND table_schema NOT IN ('pg_catalog', 'information_schema')
+            ''')
+            cursor.execute(query)
+            tables = []
+            for schema_table in cursor.fetchall():
+                full_name = schema_table[0]
+                if full_name.startswith('public.'):
+                    table_name = full_name.split('.', 1)[1]
+                    tables.append(table_name)
+            return tables
