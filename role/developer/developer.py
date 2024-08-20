@@ -138,5 +138,24 @@ class Developer:
 
     # change column data type
     @log_decorator
-    def change_column_type(self):
-        pass
+    def change_column_type(self) -> bool:
+        all_tables: list = self.__database_manager.show_all_tables()
+        is_there = False
+        self.show_table()
+        choose_table: str = input("\nEnter table name: ").strip().lower()
+        if choose_table in all_tables:
+            all_column = self.__database_manager.show_all_column(table_name=choose_table)
+            self.show_columns(all_column)
+            choose_column: str = input("\nEnter column name: ").strip().lower()
+            for col in all_column:
+                if col[0] == choose_column:
+                    is_there = True
+            self.show_data_type()
+            column_data: str = input("\nEnter data type: ").strip().lower()
+            if column_data in self.__data_type:
+                pass
+            elif column_data in self.__data_type[0]:
+                pass
+            else:
+                print("Please enter a valid data type.")
+                return False
