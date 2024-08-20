@@ -174,4 +174,10 @@ class Developer:
     # delete table
     @log_decorator
     def delete_table(self) -> bool:
-        pass
+        all_tables: list = self.__database_manager.show_all_tables()
+        self.show_table()
+        choose_table: str = input("\nEnter table name: ").strip().lower()
+        if choose_table in all_tables:
+            if self.__database_manager.delete_table(table_name=choose_table):
+                print("Table deleted successfully")
+                return True

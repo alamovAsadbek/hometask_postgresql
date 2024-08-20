@@ -116,6 +116,8 @@ def developer_menu():
             developer_menu()
         elif user_input == 5:
             print('\nHome -> Delete table\n')
+            developer.delete_table()
+            developer_menu()
         elif user_input == 6:
             print('\nHome -> Show all tables\n')
             developer.show_table()

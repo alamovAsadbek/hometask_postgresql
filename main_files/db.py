@@ -128,5 +128,13 @@ class DatabaseManager:
 
     # delete table in database
     @log_decorator
-    def delete_table(self, table_name: int):
-        pass
+    def delete_table(self, table_name: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            DROP TABLE {table_name};
+            ''').format(
+                table_name=sql.Identifier(table_name)
+            )
+            cursor.execute(query)
+            cursor.connection.commit()
+            return True
