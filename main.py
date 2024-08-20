@@ -150,6 +150,7 @@ def user_menu():
     '''
     print(text)
     try:
+
         user_input: int = int(input('Choose menu: '))
         if user_input == 1:
             pass

@@ -62,3 +62,8 @@ class Auth:
         self.__database_manager.add_data(table_name='users', columns=columns, values=values)
         print("Registered!")
         return True
+
+    @log_decorator
+    def logout(self):
+        self.__active_user = None
+        return True
