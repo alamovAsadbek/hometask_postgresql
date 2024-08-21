@@ -169,3 +169,27 @@ class DatabaseManager:
             )
             cursor.execute(query, (key_data,))
             return cursor.fetchall()
+
+    @log_decorator
+    def get_all_data(self, table_name: str):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            SELECT * FROM {table_name};
+            ''').format(table_name=sql.Identifier(table_name))
+            cursor.execute(query)
+            return cursor.fetchall()
+
+    @log_decorator
+    def delete_data(self, table_name: str, data_id):
+        with self.connect() as cursor:
+            query = sql.SQL('''
+            ALTER TABLE {table}
+            DROP COLUMN {column};            
+            ''').format(
+                table=sql.Identifier(table_name),
+                column=sql.Identifier(data_id.__str__())
+            )
+            cursor.execute(query)
+            cursor.connection.commit()
+            print("Deleted")
+            return True
